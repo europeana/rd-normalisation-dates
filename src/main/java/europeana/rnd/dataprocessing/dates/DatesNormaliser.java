@@ -27,9 +27,11 @@ import europeana.rnd.dataprocessing.dates.extraction.PatternNumericDateRangeExtr
 import europeana.rnd.dataprocessing.dates.extraction.PatternNumericDateRangeExtractorWithMissingPartsAndXx;
 
 /**
- * The main class that implements the normalisation procedure. It provides two procedures for normalising values: one for
- * normalising values of properties that should contain date values, and another for normalising values of properties that 
- * may contain dates as well as other kinds of entities (i.e., dc:subject and dc:coverage).
+ * The main class that implements the normalisation procedure. It provides two
+ * procedures for normalising values: one for normalising values of properties
+ * that should contain date values, and another for normalising values of
+ * properties that may contain dates as well as other kinds of entities (i.e.,
+ * dc:subject and dc:coverage).
  *
  */
 public class DatesNormaliser {
@@ -37,6 +39,9 @@ public class DatesNormaliser {
 
 	private static final ArrayList<DateExtractor> extractors = new ArrayList<DateExtractor>() {
 		{
+			// this pattern needs to be executed before the Edtf one. Most values that match
+			// this pattern also match the EDTF pattern, but would result in an invalid
+			// date. This pattern only matches values that would not be valid EDTF dates
 			add(new PatternBriefDateRange());
 			add(new PatternEdtf());
 			add(new PatternDateExtractorYyyyMmDdSpaces());
@@ -86,7 +91,7 @@ public class DatesNormaliser {
 		this.trySwitchingDayMonth = trySwitchingDayMonth;
 	}
 
-	public Match normalise(String input) throws Exception {
+	public Match normaliseDateProperty(String input) throws Exception {
 		try {
 			Match extracted = null;
 			String valTrim = normalizeCharacters(input);

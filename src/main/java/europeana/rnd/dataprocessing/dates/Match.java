@@ -35,7 +35,7 @@ public class Match {
 		super();
 		this.matchId = matchId;
 		this.input = input;
-		this.extracted = new EdmTemporalEntity(extracted);
+		this.extracted = extracted == null ? null : new EdmTemporalEntity(extracted);
 	}
 
 	public Match(MatchId matchId, CleanId cleanOperation, String input, TemporalEntity extracted) {
@@ -43,7 +43,7 @@ public class Match {
 		this.matchId = matchId;
 		this.cleanOperation = cleanOperation;
 		this.input = input;
-		this.extracted = new EdmTemporalEntity(extracted);
+		this.extracted = extracted == null ? null : new EdmTemporalEntity(extracted);
 	}
 
 	public Match(String input) {

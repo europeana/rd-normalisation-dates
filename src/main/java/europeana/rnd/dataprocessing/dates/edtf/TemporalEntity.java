@@ -1,9 +1,9 @@
 package europeana.rnd.dataprocessing.dates.edtf;
 
-
 /**
- * This class contains all the necessary data for represent an EDTF date with compliance level 1
- * See the specification of EDTF at https://www.loc.gov/standards/datetime/ 
+ * This class contains all the necessary data for represent an EDTF date with
+ * compliance level 1 See the specification of EDTF at
+ * https://www.loc.gov/standards/datetime/
  */
 public abstract class TemporalEntity {
 

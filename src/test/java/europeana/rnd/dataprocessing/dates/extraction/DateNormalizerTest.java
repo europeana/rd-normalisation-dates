@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.text.ParseException;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
@@ -13,11 +12,9 @@ import europeana.rnd.dataprocessing.dates.DatesNormaliser;
 import europeana.rnd.dataprocessing.dates.Match;
 import europeana.rnd.dataprocessing.dates.MatchId;
 import europeana.rnd.dataprocessing.dates.edtf.EdtfSerializer;
-import europeana.rnd.dataprocessing.dates.edtf.EdtfValidator;
-import europeana.rnd.dataprocessing.dates.edtf.Instant;
 
 public class DateNormalizerTest {
-	HashMap<String, String> testCases=new HashMap<String, String>();
+	HashMap<String, String> testCases = new HashMap<String, String>();
 
 	public DateNormalizerTest() {
 		testCases.put("XIV", "13XX");
@@ -46,27 +43,27 @@ public class DateNormalizerTest {
 		testCases.put("235 AD – 236 AD", "0235/0236");
 		testCases.put("S. XVI-XX", "15XX/19XX");
 		testCases.put("19??", "19XX");
-		testCases.put("192?", null);//ambiguous
+		testCases.put("192?", null);// ambiguous
 		testCases.put("[1712?]", "1712?");
 		testCases.put("circa 1712", "1712~");
-		testCases.put("[171-]", "171X?");
+		testCases.put("[171-]", null); // ambiguous
 		testCases.put("[ca. 1946]", "1946%");
-		testCases.put("[ca. 193-]", "193X%");
+		testCases.put("[ca. 193-]", null);// ambiguous
 		testCases.put("1651?]", "1651?");
 		testCases.put("19--?]", "19XX?");
 		testCases.put(". 1885", null);
 		testCases.put("- 1885", null);
-		testCases.put("192?-1958", "0192?/1958"); //this is an incorrect normalisation, but a few mistakes must happen
+		testCases.put("192?-1958", "0192?/1958"); // this is an incorrect normalisation, but a few mistakes must happen
 		testCases.put("1749 (Herstellung (Werk))", "1749");
-		testCases.put("1939; 1954; 1955; 1978; 1939-1945", null); //multiple dates no suported
+		testCases.put("1939; 1954; 1955; 1978; 1939-1945", null); // multiple dates no suported
 		testCases.put("[ca. 1920-1930]", "1920%/1930%");
-		testCases.put("[17__]", null);//this pattern is not supported (this pattern was never tested
+		testCases.put("[17__]", null);// this pattern is not supported (this pattern was never tested
 		testCases.put("19--]", "19XX");
-		testCases.put("1939 [1942?]", "1939?/1942?"); //this may not be 100% correct, but a few mistakes must happen 
+		testCases.put("1939 [1942?]", "1939?/1942?"); // this may not be 100% correct, but a few mistakes must happen
 		testCases.put("S.VIII-XV", "07XX/14XX");
 		testCases.put("S. XVIII-", null); // open ended period? this is not supported
 		testCases.put("S. XVI-XVIII", "15XX/17XX");
-		testCases.put("[XVI-XIX]", null);//this is missing 'S.'
+		testCases.put("[XVI-XIX]", null);// this is missing 'S.'
 		testCases.put("1972/10/31 | 1972/10/01", "1972-10-01/1972-10-31");
 		testCases.put("19xx", "19XX");
 		testCases.put("Sat Jan 01 01:00:00 CET 1701", "1701-01-01");
@@ -83,17 +80,17 @@ public class DateNormalizerTest {
 		testCases.put("19471950/19501953", null);
 		testCases.put("1947-19-50/1950-19-53", null);
 //		testCases.put("169-? - 170-?", "1690?/1700?"); // not implemented in PatternNumericDateRangeExtractorWithMissingPartsAndXx
-		testCases.put("u.1707-1739", null);//what does 'u.' mean?
+		testCases.put("u.1707-1739", null);// what does 'u.' mean?
 		testCases.put("29-10-2009 29-10-2009", "2009-10-29/2009-10-29");
 		testCases.put("MDCLXX", null);
 		testCases.put("MDCVII", null);
-		testCases.put("10th century", null); //not supported
-		testCases.put("12th century BC", null); //not supported
+		testCases.put("10th century", null); // not supported
+		testCases.put("12th century BC", null); // not supported
 		testCases.put("1952-02-25T00:00:00Z-1952-02-25T23:59:59Z", null);
-		testCases.put("1990-", null); //open ended period not supported
+		testCases.put("1990-", null); // open ended period not supported
 		testCases.put("22.07.1971 (identification)", "1971-07-22");
 		testCases.put("-2100/-1550", "-2100/-1550");
-		testCases.put("187-?]", null); //ambiguous pattern
+		testCases.put("187-?]", null); // ambiguous pattern
 		testCases.put("18. September 1914", "1914-09-18");
 		testCases.put("21.1.1921", "1921-01-21");
 		testCases.put("2014/15", "2014/2015");
@@ -129,32 +126,36 @@ public class DateNormalizerTest {
 		testCases.put("-123456/-12345", "Y-123456/Y-12345");
 		testCases.put("23.02.[18--]", "18XX-02-23?");
 		testCases.put("0 2 1980", "1980-02");
-		testCases.put("168 B.C.-135 A.D.","-0168/0135");
+		testCases.put("168 B.C.-135 A.D.", "-0168/0135");
 		testCases.put("02?-1915", null);
 		testCases.put("1.1848/49[?]", null);
 		testCases.put("1889/98? (Herstellung)", "1889?/1898?");
 		testCases.put("?/1807", "../1807");
+		testCases.put("1937-10-??", "1937-10");
+		testCases.put("09.1972 (gathering)", "1972-09");
+		testCases.put("1871 - 191-", "1871/191X");
 	}
-	
+
 	@Test
 	void extractorsTest() throws Exception {
 		DatesNormaliser normaliser = new DatesNormaliser();
-		Match match=null;
-		
-		for(String testCase: testCases.keySet()) {
-			match = normaliser.normalise(testCase);
-			if(match.getMatchId()==MatchId.NO_MATCH || match.getMatchId()==MatchId.INVALID) {
-				assertNull(testCases.get(testCase), "Test case '"+testCase+"' was a no-match but should be normalised to '"+testCases.get(testCase)+"'");
+		Match match = null;
+
+		for (String testCase : testCases.keySet()) {
+			match = normaliser.normaliseDateProperty(testCase);
+			if (match.getMatchId() == MatchId.NO_MATCH || match.getMatchId() == MatchId.INVALID) {
+				assertNull(testCases.get(testCase), "Test case '" + testCase
+						+ "' was a no-match but should be normalised to '" + testCases.get(testCase) + "'");
 			} else {
 				String edtfStr = EdtfSerializer.serialize(match.getExtracted().getEdtf());
-				assertEquals(testCases.get(testCase), edtfStr, "Test case '"+testCase+"'");			
-				if(match.getMatchId()==MatchId.DCMIPeriod) {
-					assertTrue(testCase.startsWith(match.getExtracted().getLabel()), "Test case '"+testCase+"' period name not extracted");
+				assertEquals(testCases.get(testCase), edtfStr, "Test case '" + testCase + "'");
+				if (match.getMatchId() == MatchId.DCMIPeriod) {
+					assertTrue(testCase.startsWith(match.getExtracted().getLabel()),
+							"Test case '" + testCase + "' period name not extracted");
 				}
 			}
 		}
-		
+
 	}
-	
-	
+
 }

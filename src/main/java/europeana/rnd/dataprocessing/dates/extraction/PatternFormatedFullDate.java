@@ -9,7 +9,8 @@ import europeana.rnd.dataprocessing.dates.edtf.Date;
 import europeana.rnd.dataprocessing.dates.edtf.Instant;
 
 /**
- * Patterns for date formats that are well-structured but do not follow a particular standard
+ * Patterns for date formats that are well-structured but do not follow a
+ * particular standard
  */
 public class PatternFormatedFullDate implements DateExtractor {
 	MonthMultilingual monthNames = new MonthMultilingual();

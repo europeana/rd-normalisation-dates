@@ -10,8 +10,9 @@ import europeana.rnd.dataprocessing.dates.edtf.Date.YearPrecision;
 import europeana.rnd.dataprocessing.dates.edtf.Instant;
 
 /**
- * A decade represented as YYYu or YYYx. For example, '198u',  '198x'
- * Dates such as '198-' are not supported because they may indicate a decade or a time period with an open end 
+ * A decade represented as YYYu or YYYx. For example, '198u', '198x' Dates such
+ * as '198-' are not supported because they may indicate a decade or a time
+ * period with an open end
  */
 public class PatternDecade implements DateExtractor {
 	Pattern patUncertainBegining = Pattern.compile("\\s*(?<uncertain>\\?)?(?<year>\\d\\d\\d)[xu]\\s*",

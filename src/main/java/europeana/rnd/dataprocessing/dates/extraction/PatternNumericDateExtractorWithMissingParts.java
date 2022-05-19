@@ -10,15 +10,16 @@ import europeana.rnd.dataprocessing.dates.edtf.Date;
 import europeana.rnd.dataprocessing.dates.edtf.Instant;
 
 /**
- * Patterns for numeric dates with variations in the separators of date components
+ * Patterns for numeric dates with variations in the separators of date
+ * components
  */
 public class PatternNumericDateExtractorWithMissingParts implements DateExtractor {
-	
+
 	ArrayList<Pattern> patterns = new ArrayList<Pattern>();
 	Pattern cleanSeparator = Pattern.compile("[\\-\\./]");
 
 	Pattern ambigousPattern = Pattern.compile("\\d\\d\\d\\?");
-	
+
 	public PatternNumericDateExtractorWithMissingParts() {
 		String componentSep = "[\\-\\./]";
 		String dateYmd = "\\s*(?<uncertain>\\?)?(?<year>\\d\\d\\d\\d?)" + "(?<month>" + componentSep
@@ -45,10 +46,10 @@ public class PatternNumericDateExtractorWithMissingParts implements DateExtracto
 				}
 				if (m.group("uncertain") != null || m.group("uncertain2") != null)
 					d.setUncertain(true);
-				
-				Matcher ambigMatcher=ambigousPattern.matcher(inputValue);
-				if (ambigMatcher.matches()) 
-					return null;//these cases are ambiguous. Example '187?' 
+
+				Matcher ambigMatcher = ambigousPattern.matcher(inputValue);
+				if (ambigMatcher.matches())
+					return null;// these cases are ambiguous. Example '187?'
 				return new Match(MatchId.Numeric_AllVariants, inputValue, new Instant(d));
 			}
 		}

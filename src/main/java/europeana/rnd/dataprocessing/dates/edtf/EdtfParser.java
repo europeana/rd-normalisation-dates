@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * This class implements the deserialization of EDTF strings into the EDTF structure centred on the TemporalEntity class.
+ * This class implements the deserialization of EDTF strings into the EDTF
+ * structure centred on the TemporalEntity class.
  *
  */
 public class EdtfParser {
@@ -19,7 +20,7 @@ public class EdtfParser {
 			.compile("((?<hour1>\\d{2}):(?<minute1>\\d{2}):(?<second1>\\d{2})|" + "(?<hour2>\\d{2}):(?<minute2>\\d{2})|"
 					+ "(?<hour3>\\d{2})|"
 					+ "(?<hour4>\\d{2}):(?<minute4>\\d{2}):(?<second4>\\d{2})(\\.(?<millis>\\d{1,3}))?(Z|[\\+\\-]\\d{2}:?\\d{0,2})?)");
-	
+
 //TODO: The implementation of milisseconds and timezone is not implemented	
 //TODO:millis  (\\.\\n{3})?
 //TODO:timezone			+ "(?<year>\\n{4})-(?<month>\\n{2})|(?<year>\\n{4}))(?<modifier>[\\?%~]?)");

@@ -8,12 +8,10 @@ import europeana.rnd.dataprocessing.dates.edtf.Date.YearPrecision;
 
 /**
  * This class validates instances of TemporalEntity. It validates the following:
- *  . If the start date of an interval is earlier than the end date. 
- *  . If a date has a month between 1 and 12 
- *  . If a date has a possible month day. 
- *  . Checks if a day 30 or 31 is possible for the month of the date, and checks that the 29th of
- * February is on a leap year. 
- *  . If a date is not in the future.
+ * . If the start date of an interval is earlier than the end date. . If a date
+ * has a month between 1 and 12 . If a date has a possible month day. . Checks
+ * if a day 30 or 31 is possible for the month of the date, and checks that the
+ * 29th of February is on a leap year. . If a date is not in the future.
  * 
  */
 public class EdtfValidator {

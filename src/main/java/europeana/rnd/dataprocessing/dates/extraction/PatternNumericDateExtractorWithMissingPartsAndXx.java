@@ -23,7 +23,7 @@ public class PatternNumericDateExtractorWithMissingPartsAndXx implements DateExt
 	Pattern cleanSeparatorAndUnknown = Pattern.compile("[-\\./\\?X]");
 	Pattern unknownChars = Pattern.compile("[u\\-\\?X]+$", Pattern.CASE_INSENSITIVE);
 
-	Pattern ambigousPattern = Pattern.compile("\\d\\d\\d\\-?\\?");
+	Pattern ambigousPattern = Pattern.compile("(\\d\\d\\d\\-?\\?|\\d\\d\\d\\-)");
 
 	public PatternNumericDateExtractorWithMissingPartsAndXx() {
 		String componentSep = "[\\./]";
@@ -83,9 +83,9 @@ public class PatternNumericDateExtractorWithMissingPartsAndXx implements DateExt
 				if (m.group("uncertain") != null || m.group("uncertain2") != null)
 					d.setUncertain(true);
 
-				Matcher ambigMatcher=ambigousPattern.matcher(inputValue);
-				if (ambigMatcher.matches()) 
-					return null;//these cases are ambiguous. Examples '187-?', '187?' 
+				Matcher ambigMatcher = ambigousPattern.matcher(inputValue);
+				if (ambigMatcher.matches())
+					return null;// these cases are ambiguous. Examples '187-?', '187?'
 				return new Match(MatchId.Numeric_AllVariants_Xx, inputValue, new Instant(d));
 			}
 		}

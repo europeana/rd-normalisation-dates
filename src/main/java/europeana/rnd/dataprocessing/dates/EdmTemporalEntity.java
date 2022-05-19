@@ -3,7 +3,8 @@ package europeana.rnd.dataprocessing.dates;
 import europeana.rnd.dataprocessing.dates.edtf.TemporalEntity;
 
 /**
- * a data class that contains a normalised date value. It contains an EDTF date plus a label.
+ * a data class that contains a normalised date value. It contains an EDTF date
+ * plus a label.
  *
  */
 public class EdmTemporalEntity {

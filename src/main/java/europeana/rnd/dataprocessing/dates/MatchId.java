@@ -1,17 +1,16 @@
 package europeana.rnd.dataprocessing.dates;
 
 /**
- * Identifies the pattern that was matched, or if none of the patterns matched, or if a date matched a pattern but was invalid
+ * Identifies the pattern that was matched, or if none of the patterns matched,
+ * or if a date matched a pattern but was invalid
  *
  */
 public enum MatchId {
-	NO_MATCH, 
-	INVALID, 
-	YYYY, xYYYYx, YYYY_Range_Open, YYYY_Range, DCMIPeriod, YYYY_MM_DD, xYYYY_MM_DDx, YYYYMMDD_Range_Open,
-	YYYYMMDD_Range,	MONTH_NAME, FormatedFullDate, YYYY_MM, xYYYY_MMx, DD_MM_YYYY, xDD_MM_YYYYx, Century_Numeric, Century_Roman,
-	Century_Range_Roman, Numeric_Range_AllVariants, Numeric_Range_AllVariants_Xx, Numeric_AllVariants, Decade, Numeric_AllVariants_Xx,
-	Iso8601Date, Iso8601BriefDate, Iso8601BriefDateRange, Iso8601DateRange, YYYY_MM_DD_Spaces, BcAd, Edtf, Edtf_Cleaned,
-	Brief_Date_Range, LongYear;
+	NO_MATCH, INVALID, YYYY, xYYYYx, YYYY_Range_Open, YYYY_Range, DCMIPeriod, YYYY_MM_DD, xYYYY_MM_DDx,
+	YYYYMMDD_Range_Open, YYYYMMDD_Range, MONTH_NAME, FormatedFullDate, YYYY_MM, xYYYY_MMx, DD_MM_YYYY, xDD_MM_YYYYx,
+	Century_Numeric, Century_Roman, Century_Range_Roman, Numeric_Range_AllVariants, Numeric_Range_AllVariants_Xx,
+	Numeric_AllVariants, Decade, Numeric_AllVariants_Xx, Iso8601Date, Iso8601BriefDate, Iso8601BriefDateRange,
+	Iso8601DateRange, YYYY_MM_DD_Spaces, BcAd, Edtf, Edtf_Cleaned, Brief_Date_Range, LongYear;
 
 	public String getLabel() {
 		switch (this) {

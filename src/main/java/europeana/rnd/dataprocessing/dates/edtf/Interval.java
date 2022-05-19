@@ -8,7 +8,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * An EDTF date that represents a period of time specified by a start and end date with various degrees of precision
+ * An EDTF date that represents a period of time specified by a start and end
+ * date with various degrees of precision
  */
 public class Interval extends TemporalEntity implements Serializable {
 

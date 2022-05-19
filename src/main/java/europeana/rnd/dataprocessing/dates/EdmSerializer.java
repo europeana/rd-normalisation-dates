@@ -23,7 +23,8 @@ import europeana.rnd.dataprocessing.dates.edtf.Instant;
 import europeana.rnd.dataprocessing.dates.edtf.TemporalEntity;
 
 /**
- * this class builds the RDF representation of normalised dates. It creates an edm:TimeSpan from an EdmTemporalEntity instance.
+ * this class builds the RDF representation of normalised dates. It creates an
+ * edm:TimeSpan from an EdmTemporalEntity instance.
  *
  */
 public class EdmSerializer {

@@ -1,7 +1,8 @@
 package europeana.rnd.dataprocessing.dates.edtf;
 
 /**
- * This class implements the serialisation of instances of TemporalEntity as EDTF strings. 
+ * This class implements the serialisation of instances of TemporalEntity as
+ * EDTF strings.
  *
  */
 public class EdtfSerializer {

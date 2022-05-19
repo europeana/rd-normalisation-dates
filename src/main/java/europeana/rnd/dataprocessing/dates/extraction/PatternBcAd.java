@@ -13,12 +13,12 @@ import europeana.rnd.dataprocessing.dates.edtf.Interval;
 /**
  * A year with an indication of the era, for example ‘3000 BC’. Currently, the
  * normalisation process recognizes ‘BC/AD’ and ‘AC/DC’, but the abbreviations
- * used in other languages will be supported in the future. Or a date range where
- * the start/end years contain an indication of the era.
+ * used in other languages will be supported in the future. Or a date range
+ * where the start/end years contain an indication of the era.
  *
  */
 public class PatternBcAd implements DateExtractor {
-	
+
 	static final HashSet<String> bcAbbreviations = new HashSet<String>() {
 		{
 			add("B\\.?C".toLowerCase());

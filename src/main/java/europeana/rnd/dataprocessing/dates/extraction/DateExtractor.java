@@ -7,7 +7,7 @@ import europeana.rnd.dataprocessing.dates.Match;
  *
  */
 public interface DateExtractor {
-	
+
 	public Match extract(String inputValue);
-	
+
 }

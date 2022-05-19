@@ -10,8 +10,10 @@ import europeana.rnd.dataprocessing.dates.edtf.Instant;
 import europeana.rnd.dataprocessing.dates.edtf.Interval;
 
 /**
- * A date range where the end year includes only the rightmost two digits. 
- * 
+ * A date range where the end year includes only the rightmost two digits. This
+ * pattern needs to be executed before the Edtf one. Most values that match this
+ * pattern also match the EDTF pattern, but would result in an invalid date.
+ * This pattern only matches values that would not be valid EDTF dates.
  */
 public class PatternBriefDateRange implements DateExtractor {
 	Pattern briefDateRangePattern = Pattern

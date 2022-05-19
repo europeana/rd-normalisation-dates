@@ -8,10 +8,10 @@ import org.apache.commons.lang3.StringUtils;
 import europeana.rnd.dataprocessing.dates.CleanId;
 
 /**
- * Class for the steps of the normalisations process related with
- * the detection of punctuation marks and abbreviations that signal uncertain and
- * approximate dates. This class also detects some patterns frequently used for
- * adding notes to the dates, and removes such notes.
+ * Class for the steps of the normalisations process related with the detection
+ * of punctuation marks and abbreviations that signal uncertain and approximate
+ * dates. This class also detects some patterns frequently used for adding notes
+ * to the dates, and removes such notes.
  */
 public class Cleaner {
 

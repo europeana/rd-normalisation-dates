@@ -1,8 +1,10 @@
 package europeana.rnd.dataprocessing.dates.edtf;
 
 import java.io.Serializable;
+
 /**
- * A data class for representing the hours, minutes, seconds, miliseconds and timezone part of an EDTF date
+ * A data class for representing the hours, minutes, seconds, miliseconds and
+ * timezone part of an EDTF date
  */
 public class Time implements Serializable {
 	Integer hour;

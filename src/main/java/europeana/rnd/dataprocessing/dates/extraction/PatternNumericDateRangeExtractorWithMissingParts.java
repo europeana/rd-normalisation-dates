@@ -11,7 +11,8 @@ import europeana.rnd.dataprocessing.dates.edtf.Instant;
 import europeana.rnd.dataprocessing.dates.edtf.Interval;
 
 /**
- * Patterns for numeric date ranges with variations in the separators of date components
+ * Patterns for numeric date ranges with variations in the separators of date
+ * components
  */
 public class PatternNumericDateRangeExtractorWithMissingParts implements DateExtractor {
 	// period separators "/" -> "[-\\.]"
@@ -110,9 +111,9 @@ public class PatternNumericDateRangeExtractorWithMissingParts implements DateExt
 					if (m.group("uncertain2") != null)
 						dEnd.setUncertain(true);
 				}
-				
-				if(dEnd.isUnspecified() && dStart.getYear()!=null && dStart.getYear()<1000)
-					return null;//these cases are ambiguous. Example '187-?' 
+
+				if (dEnd.isUnspecified() && dStart.getYear() != null && dStart.getYear() < 1000)
+					return null;// these cases are ambiguous. Example '187-?'
 				return new Match(MatchId.Numeric_Range_AllVariants, inputValue,
 						new Interval(new Instant(dStart), new Instant(dEnd)));
 			}

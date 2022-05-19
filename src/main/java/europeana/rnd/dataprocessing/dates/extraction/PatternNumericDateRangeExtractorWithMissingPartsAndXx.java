@@ -211,8 +211,8 @@ public class PatternNumericDateRangeExtractorWithMissingPartsAndXx implements Da
 					if (m.group("unspecified2") != null)
 						dEnd.setUnspecified(true);
 				}
-				if(dEnd.isUnspecified() && dStart.getYear()!=null && dStart.getYear()<1000)
-					return null;//these cases are ambiguous. Example '187-?' 
+				if (dEnd.isUnspecified() && dStart.getYear() != null && dStart.getYear() < 1000)
+					return null;// these cases are ambiguous. Example '187-?'
 				return new Match(MatchId.Numeric_Range_AllVariants_Xx, inputValue,
 						new Interval(new Instant(dStart), new Instant(dEnd)));
 			}

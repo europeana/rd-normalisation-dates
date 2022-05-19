@@ -5,7 +5,8 @@ import europeana.rnd.dataprocessing.dates.edtf.Instant;
 /**
  * A time interval, representing a DCMI period. They may be open.
  * 
- * For further information on DCMI periods please refer to http://dublincore.org/documents/dcmi-period/
+ * For further information on DCMI periods please refer to
+ * http://dublincore.org/documents/dcmi-period/
  */
 public final class DcmiPeriod {
 
