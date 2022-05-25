@@ -47,7 +47,7 @@ public class DateNormalizerTest {
 		testCases.put("[1712?]", "1712?");
 		testCases.put("circa 1712", "1712~");
 		testCases.put("[171-]", null); // ambiguous
-		testCases.put("[ca. 1946]", "1946%");
+		testCases.put("[ca. 1946]", "1946~");
 		testCases.put("[ca. 193-]", null);// ambiguous
 		testCases.put("1651?]", "1651?");
 		testCases.put("19--?]", "19XX?");
@@ -56,10 +56,10 @@ public class DateNormalizerTest {
 		testCases.put("192?-1958", "0192?/1958"); // this is an incorrect normalisation, but a few mistakes must happen
 		testCases.put("1749 (Herstellung (Werk))", "1749");
 		testCases.put("1939; 1954; 1955; 1978; 1939-1945", null); // multiple dates no suported
-		testCases.put("[ca. 1920-1930]", "1920%/1930%");
+		testCases.put("[ca. 1920-1930]", "1920~/1930~");
 		testCases.put("[17__]", null);// this pattern is not supported (this pattern was never tested
 		testCases.put("19--]", "19XX");
-		testCases.put("1939 [1942?]", "1939?/1942?"); // this may not be 100% correct, but a few mistakes must happen
+		testCases.put("1939 [1942?]", "1939/1942?"); // this may not be 100% correct, maybe it is not a range but two dates 
 		testCases.put("S.VIII-XV", "07XX/14XX");
 		testCases.put("S. XVIII-", null); // open ended period? this is not supported
 		testCases.put("S. XVI-XVIII", "15XX/17XX");
@@ -72,7 +72,7 @@ public class DateNormalizerTest {
 		testCases.put("-500000", "Y-500000");
 		testCases.put("091090", null);
 		testCases.put("-0043-12-07", "-0043-12-07");
-		testCases.put("1651 [ca. 1656]", "1651%/1656%");
+		testCases.put("1651 [ca. 1656]", "1651~/1656~"); // this may not be a 100% correct normalisation, maybe it is not a range but two dates 
 		testCases.put("imp. 1901", null);
 		testCases.put("-701950/-251950", "Y-701950/Y-251950");
 		testCases.put("18720601/18720630", null);
@@ -107,11 +107,11 @@ public class DateNormalizerTest {
 		testCases.put("Modern era; start=1975;", "1975/..");
 		testCases.put("1918-20", "1918/1920");
 		testCases.put("1942-1943 c.", null);
-		testCases.put("[1942-1943]", "1942?/1943?");
-		testCases.put("(1942-1943)", "1942?/1943?");
-		testCases.put("(1942)", "1942?");
+		testCases.put("[1942-1943]", "1942/1943");
+		testCases.put("(1942-1943)", "1942/1943");
+		testCases.put("(1942)", "1942");
 		testCases.put("-3.6982", null);
-		testCases.put("[ca. 16??]", "16XX%");
+		testCases.put("[ca. 16??]", "16XX~");
 		testCases.put("[19--?]", "19XX?");
 		testCases.put("ISO9126", null);
 		testCases.put("SVV", null);
@@ -124,7 +124,7 @@ public class DateNormalizerTest {
 		testCases.put("(17--?)", "17XX?");
 		testCases.put("20/09/18XX", "18XX-09-20");
 		testCases.put("-123456/-12345", "Y-123456/Y-12345");
-		testCases.put("23.02.[18--]", "18XX-02-23?");
+		testCases.put("23.02.[18--]", "18XX-02-23");
 		testCases.put("0 2 1980", "1980-02");
 		testCases.put("168 B.C.-135 A.D.", "-0168/0135");
 		testCases.put("02?-1915", null);

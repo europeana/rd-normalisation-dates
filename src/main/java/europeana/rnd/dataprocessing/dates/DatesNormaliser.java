@@ -134,16 +134,10 @@ public class DatesNormaliser {
 			if (extracted.getCleanOperation() != null) {
 				if (extracted.getCleanOperation() == CleanId.CIRCA) {
 					extracted.getExtracted().getEdtf().setApproximate(true);
-				} else if (extracted.getCleanOperation() == CleanId.SQUARE_BRACKETS) {
-					extracted.getExtracted().getEdtf().setUncertain(true);
 				} else if (extracted.getCleanOperation() == CleanId.SQUARE_BRACKETS_AND_CIRCA) {
-					extracted.getExtracted().getEdtf().setUncertain(true);
 					extracted.getExtracted().getEdtf().setApproximate(true);
 				} else if (extracted.getCleanOperation() == CleanId.PARENTHESES_FULL_VALUE_AND_CIRCA) {
-					extracted.getExtracted().getEdtf().setUncertain(true);
 					extracted.getExtracted().getEdtf().setApproximate(true);
-				} else if (extracted.getCleanOperation() == CleanId.PARENTHESES_FULL_VALUE) {
-					extracted.getExtracted().getEdtf().setUncertain(true);
 				}
 			}
 			if (extracted.getMatchId() != MatchId.NO_MATCH) {
@@ -203,10 +197,7 @@ public class DatesNormaliser {
 			if (match.getCleanOperation() != null) {
 				if (match.getCleanOperation() == CleanId.CIRCA) {
 					match.getExtracted().getEdtf().setApproximate(true);
-				} else if (match.getCleanOperation() == CleanId.SQUARE_BRACKETS) {
-					match.getExtracted().getEdtf().setUncertain(true);
 				} else if (match.getCleanOperation() == CleanId.SQUARE_BRACKETS_AND_CIRCA) {
-					match.getExtracted().getEdtf().setUncertain(true);
 					match.getExtracted().getEdtf().setApproximate(true);
 				}
 			}
