@@ -42,7 +42,7 @@ public class PatternBcAd implements DateExtractor {
 			add("apres J-C".toLowerCase());
 			add("ap[\\. ]J-C".toLowerCase());
 //		add("eKr"); removed due to ambiguity
-			add("f\\.?Kr".toLowerCase());
+			add("j\\.?Kr".toLowerCase());
 			add("μ\\.?Χ".toLowerCase());
 		}
 	};

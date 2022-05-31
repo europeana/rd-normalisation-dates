@@ -44,12 +44,12 @@ public class PatternNumericDateRangeExtractorWithMissingPartsAndXx implements Da
 		patterns.add(Pattern.compile(
 				dateYmd + dateSep
 						+ dateYmd.replace("year", "year2").replace("month", "month2").replace("day", "day2")
-								.replace("uncertain", "uncertain2").replace("unspecified", "unspecified2"),
+								.replace("unspecified", "unspecified2"),
 				Pattern.CASE_INSENSITIVE));
 		patterns.add(Pattern.compile(
 				dateDmy + dateSep
 						+ dateDmy.replace("year", "year2").replace("month", "month2").replace("day", "day2")
-								.replace("uncertain", "uncertain2").replace("unspecified", "unspecified2"),
+								.replace("unspecified", "unspecified2"),
 				Pattern.CASE_INSENSITIVE));
 
 		componentSep = "[\\.]";
@@ -63,12 +63,12 @@ public class PatternNumericDateRangeExtractorWithMissingPartsAndXx implements Da
 		patterns.add(Pattern.compile(
 				dateYmd + dateSep
 						+ dateYmd.replace("year", "year2").replace("month", "month2").replace("day", "day2")
-								.replace("uncertain", "uncertain2").replace("unspecified", "unspecified2"),
+								.replace("unspecified", "unspecified2"),
 				Pattern.CASE_INSENSITIVE));
 		patterns.add(Pattern.compile(
 				dateDmy + dateSep
 						+ dateDmy.replace("year", "year2").replace("month", "month2").replace("day", "day2")
-								.replace("uncertain", "uncertain2").replace("unspecified", "unspecified2"),
+								.replace("unspecified", "unspecified2"),
 				Pattern.CASE_INSENSITIVE));
 
 		dateSep = "\\s+[\\-\\|]\\s+";
@@ -83,12 +83,12 @@ public class PatternNumericDateRangeExtractorWithMissingPartsAndXx implements Da
 		patterns.add(Pattern.compile(
 				dateYmd + dateSep
 						+ dateYmd.replace("year", "year2").replace("month", "month2").replace("day", "day2")
-								.replace("uncertain", "uncertain2").replace("unspecified", "unspecified2"),
+								.replace("unspecified", "unspecified2"),
 				Pattern.CASE_INSENSITIVE));
 		patterns.add(Pattern.compile(
 				dateDmy + dateSep
 						+ dateDmy.replace("year", "year2").replace("month", "month2").replace("day", "day2")
-								.replace("uncertain", "uncertain2").replace("unspecified", "unspecified2"),
+								.replace("unspecified", "unspecified2"),
 				Pattern.CASE_INSENSITIVE));
 
 		dateSep = "\\s+-\\s+";

@@ -33,6 +33,16 @@ public class EdmSerializerTest {
 		assertEquals("Byzantine Period", match.getExtracted().getLabel());
 		assertEquals("Byzantine Period", edm.getProperty(Skos.prefLabel).getObject().asLiteral().getString());
 		assertEquals("0395/0641", edm.getProperty(Skos.notation).getObject().asLiteral().getString());
+
+		match = normaliser.normaliseDateProperty("name=Prehistoric Period; end=-5300");
+		edm = EdmSerializer.serialize(match.getExtracted());
+		assertEquals(edm.getURI(), "#..%2F-5300");
+		assertEquals(edm.listProperties(Dcterms.isPartOf).toList().size(), 0);
+		assertEquals("Prehistoric Period", match.getExtracted().getLabel());
+		assertEquals("Prehistoric Period", edm.getProperty(Skos.prefLabel).getObject().asLiteral().getString());
+		assertEquals("../-5300", edm.getProperty(Skos.notation).getObject().asLiteral().getString());
+		assertEquals(edm.listProperties(Edm.begin).toList().size(), 0);
+		assertEquals("-5300-12-31", edm.getProperty(Edm.end).getObject().asLiteral().getString());
 	}
 
 	@Test

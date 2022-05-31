@@ -44,16 +44,16 @@ public class DatesNormaliser {
 			// date. This pattern only matches values that would not be valid EDTF dates
 			add(new PatternBriefDateRange());
 			add(new PatternEdtf());
-			add(new PatternDateExtractorYyyyMmDdSpaces());
 			add(new PatternCentury());
 			add(new PatternDecade());
-			add(new DcmiPeriodExtractor());
-			add(new PatternMonthName());
-			add(new PatternFormatedFullDate());
 			add(new PatternNumericDateRangeExtractorWithMissingParts());
 			add(new PatternNumericDateRangeExtractorWithMissingPartsAndXx());
 			add(new PatternNumericDateExtractorWithMissingParts());
 			add(new PatternNumericDateExtractorWithMissingPartsAndXx());
+			add(new PatternDateExtractorYyyyMmDdSpaces());
+			add(new DcmiPeriodExtractor());
+			add(new PatternMonthName());
+			add(new PatternFormatedFullDate());
 			add(new PatternBcAd());
 			add(new PatternLongNegativeYear());
 		}

@@ -19,13 +19,13 @@ public class PatternCentury implements DateExtractor {
 	Pattern patYyyy = Pattern.compile("\\s*(?<uncertain>\\?)?(?<century>\\d{2})\\.{2}(?<uncertain2>\\?)?\\s*",
 			Pattern.CASE_INSENSITIVE);
 	Pattern patRoman = Pattern.compile(
-			"\\s*(s\\s|s\\.|sec\\.?)\\s*(I{1,3}|IV|VI{0,3}|I?X|XI{1,3}|XIV|XVI{0,3}|I?XX|XXI)\\s*",
+			"\\s*(s\\s|s\\.|sec\\.?|saec\\.?)\\s*(I{1,3}|IV|VI{0,3}|I?X|XI{1,3}|XIV|XVI{0,3}|I?XX|XXI)\\s*",
 			Pattern.CASE_INSENSITIVE);
 //	Pattern patYyyyX=Pattern.compile("\\s*([\\[\\?]{0,2})(\\d\\d)xx[\\]\\?]{0,2}\\s*",Pattern.CASE_INSENSITIVE);
 	Pattern patRomanClean = Pattern.compile("\\s*(I{1,3}|IV|VI{0,3}|I?X|XI{1,3}|XIV|XVI{0,3}|I?XX|XXI)\\s*",
 			Pattern.CASE_INSENSITIVE);
 
-	Pattern patRomanRange = Pattern.compile("\\s*(s\\.?|sec\\.?)\\s*([XIV]{1,5})\\s*" + "\\-" + "\\s*([XIV]{1,5})\\s*",
+	Pattern patRomanRange = Pattern.compile("\\s*(s\\.?|sec\\.?|saec\\.?)\\s*([XIV]{1,5})\\s*" + "\\-" + "\\s*([XIV]{1,5})\\s*",
 			Pattern.CASE_INSENSITIVE);
 
 	public Match extract(String inputValue) {

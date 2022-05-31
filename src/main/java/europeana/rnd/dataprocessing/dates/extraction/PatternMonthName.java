@@ -36,14 +36,14 @@ public class PatternMonthName implements DateExtractor {
 			patternDayMonthYear
 					.put(month,
 							Pattern.compile(
-									"\\s*(?<day>\\d\\d?)[ \\.,_]([a-zA-Z]{0,2}[ \\.,_])?" + monthNamesPattern
-											+ "[ \\.,_]([a-zA-Z]{0,2}[ \\.,_])?(?<year>\\d{4})\\s*",
+									"\\s*(?<day>\\d\\d?)[ \\.,]([a-zA-Z]{0,2}[ \\.,])?" + monthNamesPattern
+											+ "[ \\.,]([a-zA-Z]{0,2}[ \\.,])?(?<year>\\d{4})\\s*",
 									Pattern.CASE_INSENSITIVE));
 			patternMonthDayYear.put(month, Pattern.compile("\\s*" + monthNamesPattern
-					+ "[ \\.,_]([a-zA-Z]{0,2}[ \\.,_])?(?<day>\\d\\d?)[ \\.,_][a-zA-Z]{0,2}[ \\.,_](?<year>\\d{4})\\s*",
+					+ "[ \\.,]([a-zA-Z]{0,2}[ \\.,])?(?<day>\\d\\d?)[ \\.,][a-zA-Z]{0,2}[ \\.,](?<year>\\d{4})\\s*",
 					Pattern.CASE_INSENSITIVE));
 			patternMonthYear.put(month,
-					Pattern.compile("\\s*" + monthNamesPattern + "[ \\.,_]([a-zA-Z]{0,2}[ \\.,_])?(?<year>\\d{4})\\s*",
+					Pattern.compile("\\s*" + monthNamesPattern + "[ \\.,]([a-zA-Z]{0,2}[ \\.,])?(?<year>\\d{4})\\s*",
 							Pattern.CASE_INSENSITIVE));
 		}
 	}

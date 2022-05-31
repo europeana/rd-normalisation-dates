@@ -134,6 +134,7 @@ public class DateNormalizerTest {
 		testCases.put("1937-10-??", "1937-10");
 		testCases.put("09.1972 (gathering)", "1972-09");
 		testCases.put("1871 - 191-", "1871/191X");
+		testCases.put("name=Prehistoric Period; end=-5300", "../-5300");
 	}
 
 	@Test
@@ -150,7 +151,7 @@ public class DateNormalizerTest {
 				String edtfStr = EdtfSerializer.serialize(match.getExtracted().getEdtf());
 				assertEquals(testCases.get(testCase), edtfStr, "Test case '" + testCase + "'");
 				if (match.getMatchId() == MatchId.DCMIPeriod) {
-					assertTrue(testCase.startsWith(match.getExtracted().getLabel()),
+					assertTrue(testCase.startsWith(match.getExtracted().getLabel()) || testCase.startsWith("name="+match.getExtracted().getLabel()),
 							"Test case '" + testCase + "' period name not extracted");
 				}
 			}
