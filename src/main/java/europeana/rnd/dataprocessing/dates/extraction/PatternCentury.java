@@ -19,16 +19,16 @@ public class PatternCentury implements DateExtractor {
 	Pattern patYyyy = Pattern.compile("\\s*(?<uncertain>\\?)?(?<century>\\d{2})\\.{2}(?<uncertain2>\\?)?\\s*",
 			Pattern.CASE_INSENSITIVE);
 	Pattern patRoman = Pattern.compile(
-			"\\s*(s\\s|s\\.|sec\\.?|saec\\.?)\\s*(I{1,3}|IV|VI{0,3}|I?X|XI{1,3}|XIV|XVI{0,3}|I?XX|XXI)\\s*",
+			"\\s*(?<uncertain>\\?)?(s\\s|s\\.|sec\\.?|saec\\.?)\\s*(?<century>I{1,3}|IV|VI{0,3}|I?X|XI{1,3}|XIV|XVI{0,3}|I?XX|XXI)(?<uncertain2>\\?)?\\s*",
 			Pattern.CASE_INSENSITIVE);
 //	Pattern patYyyyX=Pattern.compile("\\s*([\\[\\?]{0,2})(\\d\\d)xx[\\]\\?]{0,2}\\s*",Pattern.CASE_INSENSITIVE);
-	Pattern patRomanClean = Pattern.compile("\\s*(I{1,3}|IV|VI{0,3}|I?X|XI{1,3}|XIV|XVI{0,3}|I?XX|XXI)\\s*",
+	Pattern patRomanClean = Pattern.compile("\\s*(?<uncertain>\\?)?(?<century>I{1,3}|IV|VI{0,3}|I?X|XI{1,3}|XIV|XVI{0,3}|I?XX|XXI)(?<uncertain2>\\?)?\\s*",
 			Pattern.CASE_INSENSITIVE);
 
-	Pattern patEnglish = Pattern.compile("\\s*(?<century>[12]?\\d)(st|nd|rd|th)\\s+century\\s*",
+	Pattern patEnglish = Pattern.compile("\\s*(?<uncertain>\\?)?(?<century>[12]?\\d)(st|nd|rd|th)\\s+century(?<uncertain2>\\?)?\\s*",
 			Pattern.CASE_INSENSITIVE);
 	
-	Pattern patRomanRange = Pattern.compile("\\s*(s\\.?|sec\\.?|saec\\.?)\\s*([XIV]{1,5})\\s*" + "\\-" + "\\s*([XIV]{1,5})\\s*",
+	Pattern patRomanRange = Pattern.compile("\\s*(?<uncertain>\\?)?(s\\.?|sec\\.?|saec\\.?)\\s*(?<century1>[XIV]{1,5})\\s*" + "\\-" + "\\s*(?<century2>[XIV]{1,5})(?<uncertain2>\\?)?\\s*",
 			Pattern.CASE_INSENSITIVE);
 
 	public Match extract(String inputValue) {
@@ -47,30 +47,40 @@ public class PatternCentury implements DateExtractor {
 			Date d = new Date();
 			d.setYearPrecision(YearPrecision.CENTURY);
 			d.setYear((Integer.parseInt(m.group("century")) - 1) * 100);
+			if (m.group("uncertain") != null || m.group("uncertain2") != null)
+				d.setUncertain(true);
 			return new Match(MatchId.Century_Numeric, inputValue, new Instant(d));
 		}
 		m = patRoman.matcher(inputValue);
 		if (m.matches()) {
 			Date d = new Date();
 			d.setYearPrecision(YearPrecision.CENTURY);
-			d.setYear((RomanToNumber.romanToDecimal(m.group(2)) - 1) * 100);
+			d.setYear((RomanToNumber.romanToDecimal(m.group("century")) - 1) * 100);
+			if (m.group("uncertain") != null || m.group("uncertain2") != null)
+				d.setUncertain(true);
 			return new Match(MatchId.Century_Roman, inputValue, new Instant(d));
 		}
 		m = patRomanClean.matcher(inputValue);
 		if (m.matches()) {
 			Date d = new Date();
 			d.setYearPrecision(YearPrecision.CENTURY);
-			d.setYear((RomanToNumber.romanToDecimal(m.group(1)) - 1) * 100);
+			d.setYear((RomanToNumber.romanToDecimal(m.group("century")) - 1) * 100);
+			if (m.group("uncertain") != null || m.group("uncertain2") != null)
+				d.setUncertain(true);
 			return new Match(MatchId.Century_Roman, inputValue, new Instant(d));
 		}
 		m = patRomanRange.matcher(inputValue);
 		if (m.matches()) {
 			Date start = new Date();
 			start.setYearPrecision(YearPrecision.CENTURY);
-			start.setYear((RomanToNumber.romanToDecimal(m.group(2)) - 1) * 100);
+			start.setYear((RomanToNumber.romanToDecimal(m.group("century1")) - 1) * 100);
 			Date end = new Date();
 			end.setYearPrecision(YearPrecision.CENTURY);
-			end.setYear((RomanToNumber.romanToDecimal(m.group(3)) - 1) * 100);
+			end.setYear((RomanToNumber.romanToDecimal(m.group("century2")) - 1) * 100);
+			if (m.group("uncertain") != null || m.group("uncertain2") != null) {
+				start.setUncertain(true);
+				end.setUncertain(true);
+			}
 			return new Match(MatchId.Century_Range_Roman, inputValue,
 					new Interval(new Instant(start), new Instant(end)));
 		}
