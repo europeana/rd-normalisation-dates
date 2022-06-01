@@ -84,7 +84,7 @@ public class DateNormalizerTest {
 		testCases.put("29-10-2009 29-10-2009", "2009-10-29/2009-10-29");
 		testCases.put("MDCLXX", null);
 		testCases.put("MDCVII", null);
-		testCases.put("10th century", null); // not supported
+		testCases.put("[10th century]", "09XX"); // not supported
 		testCases.put("12th century BC", null); // not supported
 		testCases.put("1952-02-25T00:00:00Z-1952-02-25T23:59:59Z", null);
 		testCases.put("1990-", null); // open ended period not supported
@@ -113,6 +113,8 @@ public class DateNormalizerTest {
 		testCases.put("-3.6982", null);
 		testCases.put("[ca. 16??]", "16XX~");
 		testCases.put("[19--?]", "19XX?");
+		testCases.put("19th century", "18XX");
+		testCases.put("2nd century", "01XX");
 		testCases.put("ISO9126", null);
 		testCases.put("SVV", null);
 		testCases.put("1985-10-xx", "1985-10");

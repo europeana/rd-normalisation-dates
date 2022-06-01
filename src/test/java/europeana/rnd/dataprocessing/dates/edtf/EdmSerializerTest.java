@@ -105,6 +105,24 @@ public class EdmSerializerTest {
 		assertEquals("Y-600000", edm.getProperty(Edm.end).getObject().asLiteral().getString());
 	}
 
+	@Test
+	void serializeCentury() throws Exception {
+		Match match = normaliser.normaliseDateProperty("19XX");
+		Resource edm = EdmSerializer.serialize(match.getExtracted());
+		assertEquals(edm.listProperties(Dcterms.isPartOf).toList().size(), 1);
+		assertEquals("1901-01-01", edm.getProperty(Edm.begin).getObject().asLiteral().getString());
+		assertEquals("2000-12-31", edm.getProperty(Edm.end).getObject().asLiteral().getString());
+	}
+
+	@Test
+	void serializeDecade() throws Exception {
+		Match match = normaliser.normaliseDateProperty("190X");
+		Resource edm = EdmSerializer.serialize(match.getExtracted());
+		assertEquals(edm.listProperties(Dcterms.isPartOf).toList().size(), 2);
+		assertEquals("1900-01-01", edm.getProperty(Edm.begin).getObject().asLiteral().getString());
+		assertEquals("1909-12-31", edm.getProperty(Edm.end).getObject().asLiteral().getString());
+	}
+
 	private HashSet<String> getUris(List<Statement> stms) {
 		HashSet<String> uris = new HashSet<String>();
 		for (Statement st : stms)

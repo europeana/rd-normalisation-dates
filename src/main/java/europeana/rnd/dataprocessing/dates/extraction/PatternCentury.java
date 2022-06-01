@@ -25,6 +25,9 @@ public class PatternCentury implements DateExtractor {
 	Pattern patRomanClean = Pattern.compile("\\s*(I{1,3}|IV|VI{0,3}|I?X|XI{1,3}|XIV|XVI{0,3}|I?XX|XXI)\\s*",
 			Pattern.CASE_INSENSITIVE);
 
+	Pattern patEnglish = Pattern.compile("\\s*(?<century>[12]?\\d)(st|nd|rd|th)\\s+century\\s*",
+			Pattern.CASE_INSENSITIVE);
+	
 	Pattern patRomanRange = Pattern.compile("\\s*(s\\.?|sec\\.?|saec\\.?)\\s*([XIV]{1,5})\\s*" + "\\-" + "\\s*([XIV]{1,5})\\s*",
 			Pattern.CASE_INSENSITIVE);
 
@@ -37,6 +40,13 @@ public class PatternCentury implements DateExtractor {
 			d.setYear(Integer.parseInt(m.group("century")) * 100);
 			if (m.group("uncertain") != null || m.group("uncertain2") != null)
 				d.setUncertain(true);
+			return new Match(MatchId.Century_Numeric, inputValue, new Instant(d));
+		}
+		m = patEnglish.matcher(inputValue);
+		if (m.matches()) {
+			Date d = new Date();
+			d.setYearPrecision(YearPrecision.CENTURY);
+			d.setYear((Integer.parseInt(m.group("century")) - 1) * 100);
 			return new Match(MatchId.Century_Numeric, inputValue, new Instant(d));
 		}
 		m = patRoman.matcher(inputValue);

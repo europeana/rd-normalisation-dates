@@ -10,6 +10,8 @@ import java.time.Year;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import europeana.rnd.dataprocessing.dates.edtf.Date.YearPrecision;
+
 /**
  * Part of an EDTF date that represents a point in time with various degrees of
  * precision
@@ -119,7 +121,14 @@ public class Instant extends TemporalEntity implements Serializable {
 				firstDay.setTime(null);
 				firstDay.setApproximate(false);
 				firstDay.setUncertain(false);
-				if (getDate().getYear() > -9999 && getDate().getYear() < 9999) {
+				firstDay.getDate().setYearPrecision(null);
+				if(getDate().getYearPrecision()!=null) {
+					if(getDate().getYearPrecision()==YearPrecision.CENTURY) {
+						firstDay.getDate().setYear(firstDay.getDate().getYear()+1);
+					} 					
+					firstDay.getDate().setMonth(1);
+					firstDay.getDate().setDay(1);					
+				}else if (getDate().getYear() > -9999 && getDate().getYear() < 9999) {
 					if (getDate().getMonth() != null && getDate().getMonth() > 0)
 						firstDay.getDate().setDay(1);
 					else {
@@ -145,7 +154,18 @@ public class Instant extends TemporalEntity implements Serializable {
 				lastDay.setTime(null);
 				lastDay.setApproximate(false);
 				lastDay.setUncertain(false);
-				if (getDate().getYear() > -9999 && getDate().getYear() < 9999) {
+				lastDay.getDate().setYearPrecision(null);
+				if(getDate().getYearPrecision()!=null) {
+					if(getDate().getYearPrecision()==YearPrecision.CENTURY) {
+						lastDay.getDate().setYear(lastDay.getDate().getYear()+100);
+						lastDay.getDate().setMonth(12);
+						lastDay.getDate().setDay(31);
+					} else if(getDate().getYearPrecision()==YearPrecision.DECADE) {
+						lastDay.getDate().setYear(lastDay.getDate().getYear()+9);
+						lastDay.getDate().setMonth(12);
+						lastDay.getDate().setDay(31);										
+					}
+				} else if (getDate().getYear() > -9999 && getDate().getYear() < 9999) {
 					if (getDate().getMonth() != null && getDate().getMonth() > 0) {
 						if (EdtfValidator.isMonthOf31Days(getDate().getMonth()))
 							lastDay.getDate().setDay(31);
